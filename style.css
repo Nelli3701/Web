@@ -4,7 +4,13 @@
     outline: 0;
     }
 *, ::after, ::before {
-    box-sizing: content-box;
+    box-sizing: border-box;
+}
+p {
+    margin-bottom: 0;
+}
+.padding {
+    padding: 3% 2% 0;
 }
 .container {
         max-width: 1140px;
@@ -143,7 +149,7 @@ summary img {
 }
 .banner {
     background-color: #F1E4E6;
-    max-height: 764px;
+    /*max-height: 764px;*/
     margin-bottom: 65px;
 }
 .banner-content {
@@ -177,7 +183,7 @@ summary img {
 }
 .cat-item {
     width: 360px;
-    height: 260px;
+    min-height: 260px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -959,7 +965,7 @@ input[type="radio"] {
 }
 .footer-top {
     background-image: url(img/footer.jpg);
-    background-position: bottom;
+    background-position: left bottom;
     background-size: cover;
 }
 .footer-top-content {
@@ -1091,4 +1097,80 @@ input[type="email"]:hover, input[type="email"]:focus {
 }
 .social-link:last-of-type {
     margin-right: 0;
+}
+@media screen and (max-width: 800px) {
+        .banner-img {
+            width: 50%;
+        }
+        .banner-text {
+            margin-right: 0;
+        }
+        .brand {
+            font-size: 44px;
+            line-height: 53px;
+        }
+        .fashion {
+            font-size: 26px;
+        }
+        .cat-item {
+            width: 232px;
+            min-height: 168px;  
+            background-position: center;
+            background-size: cover;
+        }
+        .mask {
+            width: 232px;
+            height: 168px;
+        }
+        .adv-items {
+            flex-direction: column;
+            width: 50%;
+            padding-bottom: 64px;
+        }
+        .adv-item {
+            padding-top: 48px;
+        }
+        .footer-top-content {
+            flex-direction: column;
+            padding-bottom: 140px;
+            padding-top: 53px;
+        }
+        .subscribe-header {
+            margin-top: 50px;
+        }
+}
+@media screen and (max-width: 414px) {
+    a.menu:nth-child(2n), a.menu:nth-child(3n) {
+        display: none;
+    }
+    .menu {
+        margin-right: 0;
+    }
+    .banner-content {
+        min-height: 363px;
+    }
+    .banner-img {
+        display: none;
+    }
+    .brand {
+        font-size: 38px;
+        line-height: 46px;
+    }
+    .fashion {
+        font-size: 20px;
+    }
+    .adv-items {
+        width: 100%;
+    }
+    .subscripe-small {
+        font-size: 16px;
+    }
+    .footer-bottom-content {
+        flex-direction: column-reverse;
+        padding-top: 43px;
+        padding-bottom: 10px;
+    }
+    .footer-copy {
+        padding-top: 40px;
+    }
 }
