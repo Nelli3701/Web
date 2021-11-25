@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+  <style>
+    i {
+      font-size: 50px;
+    }
+
+    .golden {
+      color: gold;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
+стирать, код с решением задачи пишем под комментарием.
+-->
+
+  <div class="stars_container">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+  </div>
+
+  <script>
+    "use strict";
+
+    /*
+    1. При наведении на любую из звезд, данной звезде должен ставиться класс
+    golden, также такой класс должен ставиться всем звездам до нее слева.
+    */
+    const starEls = document.querySelectorAll('.fa-star');
+    starEls.forEach(el => el.addEventListener('mouseover', event => {
+      do {
+        el.classList.add('golden');
+        el = el.previousElementSibling;
+
+      } while (el);
+    }));
+
+    /*В этом задании что-то не так сделала, потому что вроде работает, но в консоли
+    появляется ошибка, когда повторно наводишь на звездочку
+    Uncaught TypeError: Cannot read properties of null (reading 'classList')
+      at HTMLElement.<anonymous> (3.html:48)
+
+    Подскажите, с чем это может быть связано? Смотрела в решениях,там вообще реализовано
+    по-другому. Там событие вешается на контейнер. А что не так в моем решении? */
+    /*
+    2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
+    задания должны быть удалены.
+     */
+    starEls.forEach(el => el.addEventListener('mouseout', event => {
+      do {
+        el.classList.remove('golden');
+        el = el.previousElementSibling;
+
+      } while (el);
+    }));
+
+    /*
+    3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
+    звезды (временно могут становиться черными). Почему так? Напишите словами.
+    Можем ли мы это исправить? Если да, то предложите решение.
+    */
+
+    /*Мигают, потому что мы на короткий промежуток времени убираем курсор с элемента,
+    когда перемещаемся от звездочки к звездочке. В узле есть перенос строки, пробел.
+    Можно убрать все разрывы строк и пробелы между тегами <i>.
+      У меня возникает ошибка, когда второй раз навожу на элемент, который уже был
+      выделен желтым. Не понимаю, в чем причина.
+    */
+  </script>
+</body>
+
+</html>
