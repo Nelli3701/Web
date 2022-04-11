@@ -14,7 +14,7 @@
             <div class="logo">E-shop</div>
             <div class="cart">
 
-                <filter @filter="filter"></filter>
+                <filtr @filter="filter"></filtr>
 
                 <!--
             <form action="#" class="search-form" @submit.prevent="filter">
@@ -27,13 +27,13 @@
                 <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
 
 
-
                 <cart :cart-items="cartItems" :img="imgCart" :visibility="showCart"></cart>
 
             </div>
 
         </header>
         <main>
+            <error-comp></error-comp>
             <products :products="filtered" :img="imgProduct" @add-product="addProduct"></products>
         </main>
     </div>
@@ -44,6 +44,7 @@
     <script src="js/ProductComponent.js"></script>
     <script src="js/CartComponent.js"></script>
     <script src="js/FilterComponent.js"></script>
+    <script src="js/ErrorComponent.js"></script>
     <script src="js/main.js"></script>
 </body>
 
