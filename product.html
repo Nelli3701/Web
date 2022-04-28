@@ -18,282 +18,292 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="content">
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-                crossorigin="anonymous"></script>
-            <header class="main-header">
-                <div class="top container">
-                    <nav class="top-left">
-                        <a href="index.html"><img src="img/logo.svg" alt="logo"></a>
-                        <form class="search-form" action="">
-                            <button class=search><img src="img/search.png" alt="search"></button>
-                            <input type="search" placeholder="Что ищем?">
-                        </form>
-                    </nav>
-                    <nav class="top-right">
-                        <details class="menu">
-                            <summary><img src="img/burger.svg" alt="меню"></summary>
+    <div id="app">
+        <div class="wrapper">
+            <div class="content">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+                    crossorigin="anonymous"></script>
+                <header class="main-header">
+                    <div class="top container">
+                        <nav class="top-left">
+                            <a href="index.html"><img src="img/logo.svg" alt="logo"></a>
+                            <!--Фильтр в шапке сайта-->
+                            <filtr @filter="filter"></filtr>
+                        </nav>
+                        <nav class="top-right">
+                            <details class="menu" id="js-details">
+                                <summary><img src="img/burger.svg" alt="меню"></summary>
 
-                            <nav class="menu-details">
-                                <button type="button" aria-label="Close"></button>
+                                <nav class="menu-details">
+                                    <button type="button" aria-label="Close" @click="detailsClosed"></button>
 
-                                <p class="menu-details-header">
-                                    Menu
+                                    <p class="menu-details-header">
+                                        Menu
+                                    </p>
+                                    <nav class="navbar pink">
+                                        Man
+                                    </nav>
+                                    <ul class="navbar-list">
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a>
+                                        </li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Bags</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Denim</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
+                                    </ul>
+                                    <nav class="navbar pink">
+                                        Woman
+                                    </nav>
+                                    <ul class="navbar-list">
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a>
+                                        </li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Jackets & Coats</a>
+                                        </li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Polos</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Shirts</a></li>
+                                    </ul>
+                                    <nav class="navbar pink">
+                                        Kids
+                                    </nav>
+                                    <ul class="navbar-list">
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a>
+                                        </li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Jackets & Coats</a>
+                                        </li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Polos</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Shirts</a></li>
+                                        <li class="navbar-list-item"><a href="#" class="navbar-item">Bags</a></li>
+                                    </ul>
+                                </nav>
+                            </details>
+                            <a class="menu" href="registration.html"><img src="img/auth.svg" alt="auth"></a>
+                            <div class="menu rel" @mouseover="showCart = !showCart">
+                                <img src="img/cart.png" alt="cart">
+                                <span class="cart-amount">{{ checkQuantity() }}</span>
+                            </div>
+                            <!--тут невидимый блок корзины-->
+                            <cart :cart-items="cartItems" :visibility="showCart"></cart>
+
+
+                        </nav>
+                    </div>
+
+                </header>
+                <nav class="product-nav">
+                    <div class="product-nav-box container">
+                        <header class="product-name">New arrivals</header>
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="breadcrumb-link" href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a class="breadcrumb-link" href="catalog.html">Men</a></li>
+                                <li class="breadcrumb-item pink" aria-current="page">New arrivals</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </nav>
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner container">
+                        <div class="carousel-item active">
+                            <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true">
+                        </span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="product-box container">
+                    <header class="product-header">Women collection</header>
+                    <img src="img/line.jpg" alt="pink line">
+                    <header class="second-product-header"></header>
+
+                    <article class="product-desc">Compellingly actualize fully researched processes before proactive
+                        outsourcing. Progressively syndicate collaborative architectures before cutting-edge services.
+                        Completely visualize parallel core competencies rather than exceptional portals.</article>
+                    <div class="large-price">$561</div>
+
+                    <div class="filter-select">
+                        <details class="filter-box">
+                            <summary class="filter-item">
+                                <p>TRENDING NOW <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
                                 </p>
-                                <nav class="navbar pink">
-                                    Man
-                                </nav>
-                                <ul class="navbar-list">
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Bags</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Denim</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
-                                </ul>
-                                <nav class="navbar pink">
-                                    Woman
-                                </nav>
-                                <ul class="navbar-list">
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Jackets & Coats</a>
-                                    </li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Polos</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Shirts</a></li>
-                                </ul>
-                                <nav class="navbar pink">
-                                    Kids
-                                </nav>
-                                <ul class="navbar-list">
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Accessories</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Jackets & Coats</a>
-                                    </li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Polos</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">T-Shirts</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Shirts</a></li>
-                                    <li class="navbar-list-item"><a href="#" class="navbar-item">Bags</a></li>
-                                </ul>
-                            </nav>
+                            </summary>
                         </details>
-                        <a class="menu" href="registration.html"><img src="img/auth.svg" alt="auth"></a>
-                        <a class="menu" href="cart.html"><img src="img/cart.svg" alt="cart"></a>
+                        <details class="filter-box">
+                            <summary class="filter-item">
+                                <p>SIZE <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
+                                </p>
+                            </summary>
+                            <form class="filter-box-form" action="#">
+                                <fieldset class="filter-box-fieldset">
 
+                                    <label for="xs">
+                                        <input id="sport" type="checkbox"> XS</label><br>
+                                    <label for="s">
+                                        <input id="turist" type="checkbox"> S</label><br>
+                                    <label for="m">
+                                        <input id="padi" type="checkbox"> M</label><br>
+                                    <label for="l">
+                                        <input id="travels" type="checkbox"> L</label>
 
-                    </nav>
-                </div>
-
-            </header>
-            <nav class="product-nav">
-                <div class="product-nav-box container">
-                    <header class="product-name">New arrivals</header>
-
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="catalog.html">Men</a></li>
-                            <li class="breadcrumb-item pink" aria-current="page">New arrivals</li>
-                        </ol>
-                    </nav>
-                </div>
-
-            </nav>
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner container">
-                    <div class="carousel-item active">
-                        <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-img" src="img/carousel.jpg" alt="carousel-1">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true">
-                    </span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-            <div class="product-box container">
-                <header class="product-header">Women collection</header>
-                <img src="img/line.jpg" alt="pink line">
-                <header class="second-product-header"></header>
-
-                <article class="product-desc">Compellingly actualize fully researched processes before proactive
-                    outsourcing. Progressively syndicate collaborative architectures before cutting-edge services.
-                    Completely visualize parallel core competencies rather than exceptional portals.</article>
-                <div class="large-price">$561</div>
-
-                <div class="filter-select">
-                    <details class="filter-box">
-                        <summary class="filter-item">
-                            <p>TRENDING NOW <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
-                            </p>
-                        </summary>
-                    </details>
-                    <details class="filter-box">
-                        <summary class="filter-item">
-                            <p>SIZE <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
-                            </p>
-                        </summary>
-                        <form class="filter-box-form" action="#">
-                            <fieldset class="filter-box-fieldset">
-
-                                <label for="xs">
-                                    <input id="sport" type="checkbox"> XS</label><br>
-                                <label for="s">
-                                    <input id="turist" type="checkbox"> S</label><br>
-                                <label for="m">
-                                    <input id="padi" type="checkbox"> M</label><br>
-                                <label for="l">
-                                    <input id="travels" type="checkbox"> L</label>
-
-                            </fieldset>
-                        </form>
-                    </details>
-                    <details class="filter-box">
-                        <summary class="filter-item">
-                            <p>PRICE <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
-                            </p>
-                        </summary>
-                    </details>
-                </div>
-                <div class="add-box-product">
-                    <a href="#" class="add-product">
-                        <img src="img/add-product.svg" alt="add-to-card">
-                        <div class="add-txt-product">Add to Cart</div>
-                    </a>
-                </div>
-            </div>
-            <section class="fetured-items">
-
-                <div class="fetured-list container">
-                    <div class="fetured-cart">
-                        <a class="item-link" href="#">
-                            <div class="fetured-list-item">
-                                <img class="img-fetured" src="img/item1.png" alt="item 1">
-
-                                <div class="item-content">
-                                    <header class="item-header">ELLERY X M'O CAPSULE</header>
-                                    <p class="text">Known for her sculptural takes on traditional tailoring,
-                                        Australian
-                                        arbiter
-                                        of cool Kym Ellery teams up with Moda Operandi.</p>
-                                    <p class="item-price">$52.00</p>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="add-box">
-                            <a href="#" class="add">
-                                <img src="img/add-card.svg" alt="add-to-card">
-                                <div class="add-txt">Add to Cart</div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="fetured-cart">
-                        <a class="item-link" href="#">
-                            <div class="fetured-list-item">
-                                <img class="img-fetured" src="img/item1.png" alt="item 1">
-
-                                <div class="item-content">
-                                    <header class="item-header">ELLERY X M'O CAPSULE</header>
-                                    <p class="text">Known for her sculptural takes on traditional tailoring,
-                                        Australian
-                                        arbiter
-                                        of cool Kym Ellery teams up with Moda Operandi.</p>
-                                    <p class="item-price">$52.00</p>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="add-box">
-                            <a href="#" class="add">
-                                <img src="img/add-card.svg" alt="add-to-card">
-                                <div class="add-txt">Add to Cart</div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="fetured-cart">
-                        <a class="item-link" href="#">
-                            <div class="fetured-list-item">
-                                <img class="img-fetured" src="img/item3.png" alt="item 3">
-
-                                <div class="item-content">
-                                    <header class="item-header">ELLERY X M'O CAPSULE</header>
-                                    <p class="text">Known for her sculptural takes on traditional tailoring,
-                                        Australian
-                                        arbiter
-                                        of cool Kym Ellery teams up with Moda Operandi.</p>
-                                    <p class="item-price">$52.00</p>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="add-box">
-                            <a href="#" class="add">
-                                <img src="img/add-card.svg" alt="add-to-card">
-                                <div class="add-txt">Add to Cart</div>
-                            </a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <footer class="footer">
-                <div class="footer-top">
-                    <div class="footer-top-content container">
-                        <figure class="quote">
-                            <img src="img/figura.png" alt="автор цитаты">
-                            <figcaption>“Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                                condimentum“</figcaption>
-                        </figure>
-                        <div class="subscribe">
-                            <header class="subscribe-header">subscribe <br><span class="subscripe-small">for our
-                                    newletter
-                                    and promotion</span>
-                            </header>
-                            <form action="#" class="subscribe-form">
-                                <input type="email" placeholder="Enter Your Email">
-                                <input type="submit" value="Subscribe" class="subscribe-submit">
+                                </fieldset>
                             </form>
+                        </details>
+                        <details class="filter-box">
+                            <summary class="filter-item">
+                                <p>PRICE <i class="fa fa-chevron-down filter-icon" aria-hidden="true"></i>
+                                </p>
+                            </summary>
+                        </details>
+                    </div>
+                    <div class="add-box-product">
+                        <a href="#" class="add-product">
+                            <img src="img/add-product.svg" alt="add-to-card">
+                            <div class="add-txt-product">Add to Cart</div>
+                        </a>
+                    </div>
+                </div>
+                <section class="fetured-items">
+
+                    <div class="fetured-list container">
+                        <div class="fetured-cart">
+                            <a class="item-link" href="#">
+                                <div class="fetured-list-item">
+                                    <img class="img-fetured" src="img/item1.png" alt="item 1">
+
+                                    <div class="item-content">
+                                        <header class="item-header">ELLERY X M'O CAPSULE</header>
+                                        <p class="text">Known for her sculptural takes on traditional tailoring,
+                                            Australian
+                                            arbiter
+                                            of cool Kym Ellery teams up with Moda Operandi.</p>
+                                        <p class="item-price">$52.00</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="add-box">
+                                <a href="#" class="add">
+                                    <img src="img/add-card.svg" alt="add-to-card">
+                                    <div class="add-txt">Add to Cart</div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="fetured-cart">
+                            <a class="item-link" href="#">
+                                <div class="fetured-list-item">
+                                    <img class="img-fetured" src="img/item1.png" alt="item 1">
+
+                                    <div class="item-content">
+                                        <header class="item-header">ELLERY X M'O CAPSULE</header>
+                                        <p class="text">Known for her sculptural takes on traditional tailoring,
+                                            Australian
+                                            arbiter
+                                            of cool Kym Ellery teams up with Moda Operandi.</p>
+                                        <p class="item-price">$52.00</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="add-box">
+                                <a href="#" class="add">
+                                    <img src="img/add-card.svg" alt="add-to-card">
+                                    <div class="add-txt">Add to Cart</div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="fetured-cart">
+                            <a class="item-link" href="#">
+                                <div class="fetured-list-item">
+                                    <img class="img-fetured" src="img/item3.png" alt="item 3">
+
+                                    <div class="item-content">
+                                        <header class="item-header">ELLERY X M'O CAPSULE</header>
+                                        <p class="text">Known for her sculptural takes on traditional tailoring,
+                                            Australian
+                                            arbiter
+                                            of cool Kym Ellery teams up with Moda Operandi.</p>
+                                        <p class="item-price">$52.00</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="add-box">
+                                <a href="#" class="add">
+                                    <img src="img/add-card.svg" alt="add-to-card">
+                                    <div class="add-txt">Add to Cart</div>
+                                </a>
+                            </div>
+
                         </div>
 
                     </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="footer-bottom-content container">
-                        <div class="footer-copy">&copy; 2021 Brand All Rights Reserved.</div>
-                        <div class="footer-social">
+
+                </section>
 
 
-                            <a href="#" class="social-link"><span class="fa fa-facebook"></span></a>
-
-
-                            <a href="#" class="social-link"><span class="fa fa-instagram"></span></a>
-
-
-                            <a href="#" class="social-link"><span class="fa fa-pinterest-p"></span></a>
-
-                            <a href="#" class="social-link"><span class="fa fa-twitter"></span></a>
-
+                <footer class="footer">
+                    <div class="footer-top">
+                        <div class="footer-top-content container">
+                            <figure class="quote">
+                                <img src="img/figura.png" alt="автор цитаты">
+                                <figcaption>“Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                                    condimentum“</figcaption>
+                            </figure>
+                            <div class="subscribe">
+                                <header class="subscribe-header">subscribe <br><span class="subscripe-small">for our
+                                        newletter
+                                        and promotion</span>
+                                </header>
+                                <form action="#" class="subscribe-form">
+                                    <input type="email" placeholder="Enter Your Email">
+                                    <input type="submit" value="Subscribe" class="subscribe-submit">
+                                </form>
+                            </div>
 
                         </div>
                     </div>
-                </div>
-            </footer>
+                    <div class="footer-bottom">
+                        <div class="footer-bottom-content container">
+                            <div class="footer-copy">&copy; 2021 Brand All Rights Reserved.</div>
+                            <div class="footer-social">
+
+
+                                <a href="#" class="social-link"><span class="fa fa-facebook"></span></a>
+
+
+                                <a href="#" class="social-link"><span class="fa fa-instagram"></span></a>
+
+
+                                <a href="#" class="social-link"><span class="fa fa-pinterest-p"></span></a>
+
+                                <a href="#" class="social-link"><span class="fa fa-twitter"></span></a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="dist/bundle.js"></script>
 </body>
 
 </html>
